@@ -42,6 +42,7 @@ struct DadosRelatorio {
 void contLinhas(const char* arquivo, int& linhas);
 void lerDadosVendas(const char* arquivo, int linhas, string vendasCadastradas[]);
 void converteDados(string vendasCadastradas[], int linhas, InfoVenda &vendas, InfoItens itens[],int &numItens, DadosRelatorio &dado);
+void vendasTotaisRel(DadosRelatorio &dado, InfoVenda &vendas, InfoItens itens[],int numItens);
 
 int main()
 {
@@ -54,35 +55,13 @@ int main()
 
     lerDadosVendas(arquivo,linhas,vendasCadastradas);
 
-    /*for(int i = 0; i < linhas; i++) {
-        cout << vendasCadastradas[i] << endl;
-    }*/
-
     InfoItens itens[linhas-5];
     InfoVenda vendas;
     int numItens = 0;
     DadosRelatorio dado;
     converteDados(vendasCadastradas,linhas,vendas,itens,numItens, dado);
-    cout << "Número da Venda: " << vendas.numeroVenda << endl;
-    cout << "Data: " << vendas.data << endl;
-    cout << "Código do Cliente: " << vendas.codigoCliente << endl;
-    cout << "Quantidade de IDS: " << vendas.qntId << endl;
-    cout << "Total da Venda: " << fixed << setprecision(2) << vendas.totalVenda << endl;
-    cout << endl;
-    for (int i = 0; i < numItens; i++) {
-        cout << "Item " << i + 1 << ":" << endl;
-        cout << "  ID: " << itens[i].id << endl;
-        cout << "  Nome: " << itens[i].nome << endl;
-        cout << "  Preço: " << itens[i].preco << endl;
-        cout << "  Quantidade: " << itens[i].qnt << endl;
-        cout << "  Subtotal: " << itens[i].subtotal << endl;
-        cout << endl;
-    }
-    cout << "Total de quantidades vendidas: " << dado.quantidadeTotal << endl;
-    cout << "Receita total gerada: " << dado.receitaTotal << endl;
-    cout << "media de lucro por item vendido: " << dado.receitaTotal/dado.quantidadeTotal << endl;
-    cout << "item mais vendido: " << dado.maisVendido << ", "<< dado.maisUnidades << " unidades" << endl;
-    cout << "item menos vendido: " << dado.menosVendido << ", "<< dado.menosUnidades << " unidades" << endl;
+    vendasTotaisRel(dado,vendas,itens,numItens);
+
     delete[] vendasCadastradas;
     return 0;
 }
@@ -152,4 +131,36 @@ void converteDados(string vendasCadastradas[], int linhas, InfoVenda &vendas, In
 
         numItens++; // Incrementa o contador de itens
     }
+}
+
+void vendasTotaisRel(DadosRelatorio &dado, InfoVenda &vendas, InfoItens itens[],int numItens) {
+    ofstream saida(relatorioTotal, ios::out | ios::app);
+    if (!saida.is_open()) {
+        cerr << "Erro ao abrir o arquivo de relatório!" << endl;
+        return;
+    }
+
+    saida << "Data: " << vendas.data << endl
+          << "Número da Venda: " << vendas.numeroVenda << endl
+          << "Código do Cliente: " << vendas.codigoCliente << endl
+          << "Quantidade de IDs: " << vendas.qntId << endl
+          << "Total da Venda: " << fixed << setprecision(2) << vendas.totalVenda << endl
+          << endl;
+    for (int i = 0; i < numItens; i++) {
+        saida << "Item " << i + 1 << ":" << endl
+              << "  ID: " << itens[i].id << endl
+              << "  Nome: " << itens[i].nome << endl
+              << "  Preço: " << itens[i].preco << endl
+              << "  Quantidade: " << itens[i].qnt << endl
+              << "  Subtotal: " << itens[i].subtotal << endl
+              << endl;
+    }
+    saida << "Total de quantidades vendidas: " << dado.quantidadeTotal << endl
+          << "Receita total gerada: " << dado.receitaTotal << endl
+          << "media de lucro por item vendido: " << dado.receitaTotal/dado.quantidadeTotal << endl
+          << "item mais vendido: " << dado.maisVendido << ", "<< dado.maisUnidades << " unidades" << endl
+          << "item menos vendido: " << dado.menosVendido << ", "<< dado.menosUnidades << " unidades" << endl
+          << endl;
+
+    saida.close();
 }
