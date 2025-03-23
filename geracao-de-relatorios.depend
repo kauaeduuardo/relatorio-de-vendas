@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1742693902 source:c:\users\kauã eduardo\documents\ufs\2024.2\prog2\projeto_02_sistema-de-vendas\geracao-de-relatorios\main.cpp
+	<iostream>
+	<fstream>
+	<sstream>
+	<cstring>
+	<locale.h>
+	<iomanip>
+
