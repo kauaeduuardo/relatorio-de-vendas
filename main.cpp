@@ -10,6 +10,7 @@
 using namespace std;
 
 const char* arquivo = "vendas.txt";
+const char* relatorioTotal = "vendasTotais.txt";
 
 struct InfoVenda {
     int numeroVenda;
@@ -27,11 +28,20 @@ struct InfoItens {
     float subtotal; // preço unitário x quantidade
 };
 
+struct DadosRelatorio {
+    int quantidadeTotal = 0;
+    float receitaTotal = 0;
+    string maisVendido = " ";
+    int maisUnidades = 0;
+    string menosVendido = " ";
+    int menosUnidades = INT_MAX;
+};
+
 //Funções - protótipos:
 
 void contLinhas(const char* arquivo, int& linhas);
 void lerDadosVendas(const char* arquivo, int linhas, string vendasCadastradas[]);
-void converteDados(string vendasCadastradas[], int linhas, InfoVenda &vendas, InfoItens itens[],int &numItens);
+void converteDados(string vendasCadastradas[], int linhas, InfoVenda &vendas, InfoItens itens[],int &numItens, DadosRelatorio &dado);
 
 int main()
 {
@@ -51,7 +61,8 @@ int main()
     InfoItens itens[linhas-5];
     InfoVenda vendas;
     int numItens = 0;
-    converteDados(vendasCadastradas,linhas,vendas,itens,numItens);
+    DadosRelatorio dado;
+    converteDados(vendasCadastradas,linhas,vendas,itens,numItens, dado);
     cout << "Número da Venda: " << vendas.numeroVenda << endl;
     cout << "Data: " << vendas.data << endl;
     cout << "Código do Cliente: " << vendas.codigoCliente << endl;
@@ -67,7 +78,11 @@ int main()
         cout << "  Subtotal: " << itens[i].subtotal << endl;
         cout << endl;
     }
-
+    cout << "Total de quantidades vendidas: " << dado.quantidadeTotal << endl;
+    cout << "Receita total gerada: " << dado.receitaTotal << endl;
+    cout << "media de lucro por item vendido: " << dado.receitaTotal/dado.quantidadeTotal << endl;
+    cout << "item mais vendido: " << dado.maisVendido << ", "<< dado.maisUnidades << " unidades" << endl;
+    cout << "item menos vendido: " << dado.menosVendido << ", "<< dado.menosUnidades << " unidades" << endl;
     delete[] vendasCadastradas;
     return 0;
 }
@@ -100,7 +115,7 @@ void lerDadosVendas(const char* arquivo, int linhas, string vendasCadastradas[])
     leitura.close();
 }
 
-void converteDados(string vendasCadastradas[], int linhas, InfoVenda &vendas, InfoItens itens[], int &numItens) {
+void converteDados(string vendasCadastradas[], int linhas, InfoVenda &vendas, InfoItens itens[], int &numItens,DadosRelatorio &dado) {
     vendas.numeroVenda = stoi(vendasCadastradas[0]);
     strncpy(vendas.data, vendasCadastradas[1].c_str(), 10);
     vendas.data[10] = '\0';
@@ -110,6 +125,7 @@ void converteDados(string vendasCadastradas[], int linhas, InfoVenda &vendas, In
 
     int numVendas = (linhas - 5) / 5; // Ignora as primeiras 5 linhas e calcula o número de vendas restantes
     numItens = 0; // Inicializa o contador de itens
+
 
     for (int i = 0; i < numVendas; i++) {
         int baseIndice = 5 + i * 5; // Índice base para cada venda, começando após as 5 primeiras linhas
@@ -121,6 +137,18 @@ void converteDados(string vendasCadastradas[], int linhas, InfoVenda &vendas, In
         itens[numItens].preco = stof(vendasCadastradas[baseIndice + 2]);
         itens[numItens].qnt = stoi(vendasCadastradas[baseIndice + 3]);
         itens[numItens].subtotal = stof(vendasCadastradas[baseIndice + 4]);
+
+        dado.quantidadeTotal+=itens[numItens].qnt;
+        dado.receitaTotal+=itens[numItens].subtotal;
+
+        if (itens[numItens].qnt > dado.maisUnidades) {
+            dado.maisUnidades = itens[numItens].qnt;
+            dado.maisVendido = itens[numItens].nome;
+        }
+        if (itens[numItens].qnt < dado.menosUnidades) {
+            dado.menosUnidades = itens[numItens].qnt;
+            dado.menosVendido = itens[numItens].nome;
+        }
 
         numItens++; // Incrementa o contador de itens
     }
