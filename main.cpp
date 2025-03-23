@@ -10,7 +10,7 @@
 using namespace std;
 
 const char* arquivo = "vendas.txt";
-const char* relatorioTotal = "vendasTotais.txt";
+const char* vendasTotais = "relatorio_vendasTotais.txt";
 
 struct InfoVenda {
     int numeroVenda;
@@ -134,7 +134,7 @@ void converteDados(string vendasCadastradas[], int linhas, InfoVenda &vendas, In
 }
 
 void vendasTotaisRel(DadosRelatorio &dado, InfoVenda &vendas, InfoItens itens[],int numItens) {
-    ofstream saida(relatorioTotal, ios::out | ios::app);
+    ofstream saida(vendasTotais, ios::out | ios::app);
     if (!saida.is_open()) {
         cerr << "Erro ao abrir o arquivo de relatório!" << endl;
         return;
