@@ -7,11 +7,13 @@
 	<locale.h>
 	<iomanip>
 
-1742870237 source:c:\users\kauã eduardo\documents\ufs\2024.2\prog2\projeto_02_sistema-de-vendas\sistema-de-vendas\main.cpp
+1742912153 source:c:\users\kauã eduardo\documents\ufs\2024.2\prog2\projeto_02_sistema-de-vendas\sistema-de-vendas\main.cpp
 	<iostream>
 	<fstream>
 	<sstream>
 	<cstring>
 	<locale.h>
 	<iomanip>
+	<ctime>
+	<climits>
 
