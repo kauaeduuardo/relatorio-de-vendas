@@ -6,12 +6,14 @@
 #include <iomanip>
 
 #define TAMANHO_NOME 48
+#define MAX_ITENS 100
 
 using namespace std;
 
 const char* arquivo = "vendas.txt";
 const char* vendasTotais = "relatorio_vendasTotais.txt";
 const char* vendasLista = "relatorio_vendasLista.txt";
+const char* intervaloVendas = "relatorio_intervaloDeVendas.txt";
 
 struct InfoVenda {
     int numeroVenda;
@@ -38,15 +40,21 @@ struct DadosRelatorio {
     int menosUnidades = INT_MAX;
 };
 
-//Funções - protótipos:
+struct DataInteira {
+    int dia;
+    int mes;
+    int ano;
+};
 
+//Funções - protótipos:
 void contLinhas(const char* arquivo, int& linhas);
 void lerDadosVendas(const char* arquivo, int linhas, string vendasCadastradas[]);
 void converteDados(string vendasCadastradas[], int linhas, InfoVenda &vendas, InfoItens itens[],int &numItens, DadosRelatorio &dado);
 void carregarDadosRelatorio(DadosRelatorio &dado);
 void vendasTotaisRel(DadosRelatorio &dado, InfoVenda &vendas, InfoItens itens[],int numItens);
 void vendasListaRel(InfoVenda &vendas, InfoItens itens[], int numItens);
-void resetRelatorios(char reseta);
+void limpaArquivo(char reseta);
+
 
 int main()
 {
@@ -69,32 +77,6 @@ int main()
     converteDados(vendasCadastradas,linhas,vendas,itens,numItens, dado);
     vendasTotaisRel(dado,vendas,itens,numItens);
     vendasListaRel(vendas,itens,numItens);
-
-    cout << "RELATÓRIO TOTAL DAS VENDAS CADASTRADAS: " << endl
-          << setfill('-') << setw(60) << "" << setfill(' ') << endl
-          << "Quantidade Total de Produtos Vendidos: " << dado.quantidadeTotal << " unidades"<< endl
-          << "Receita Total: R$ " << dado.receitaTotal << endl
-          << "Média de Renda por Produto: R$ " << dado.receitaTotal/dado.quantidadeTotal << " por item"<< endl
-          << "Item Mais Vendido: " << dado.maisVendido << ", "<< dado.maisUnidades << " unidades" << endl
-          << "Item Menos Vendido: " << dado.menosVendido << ", "<< dado.menosUnidades << " unidades" << endl
-          << setfill('-') << setw(60) << "" << setfill(' ') << endl;
-    cout << endl;
-    cout << endl << "RELATÓRIO LISTA DE VENDAS: " << endl;
-    for (int i = 0; i < numItens; i++) {
-        cout << setfill('-') << setw(60) << "" << setfill(' ') << endl
-             << "Data: " << vendas.data << endl
-             << "ID do produto: " << itens[i].id << ", "
-             << "Nome do produto: " << itens[i].nome << endl
-             << "Preço do produto: R$ " << itens[i].preco << ", "
-             << "Quantidade adquirida: " << itens[i].qnt << " unidade(s)" << endl
-             << "Subtotal: R$ " << itens[i].subtotal << endl;
-    }
-    cout << setfill('-') << setw(60) << "" << setfill(' ') << endl;
-
-    char reseta;
-    cout << "qual arquivo deseja resetar: [1 - TOTAL] ou [2 - LISTA] \n> ";
-    cin >> reseta;
-    resetRelatorios(reseta);
 
     delete[] vendasCadastradas;
     return 0;
@@ -220,7 +202,7 @@ void vendasListaRel(InfoVenda &vendas, InfoItens itens[], int numItens) {
     saida.close();
 }
 
-void resetRelatorios(char reseta) {
+void limpaArquivo(char reseta) {
     ofstream saida;
 
     switch (reseta) {
