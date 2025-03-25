@@ -28,7 +28,7 @@ struct InfoItens {
     char nome[TAMANHO_NOME+1];
     float preco;
     int qnt;
-    float subtotal; // preço unitário x quantidade
+    float subtotal; // preï¿½o unitï¿½rio x quantidade
 };
 
 struct DadosRelatorio {
@@ -46,7 +46,7 @@ struct DataInteira {
     int ano;
 };
 
-//Funções - protótipos:
+//Funï¿½ï¿½es - protï¿½tipos:
 void contLinhas(const char* arquivo, int& linhas);
 void lerDadosVendas(const char* arquivo, int linhas, string vendasCadastradas[]);
 void converteDados(string vendasCadastradas[], int linhas, InfoVenda &vendas, InfoItens itens[],int &numItens, DadosRelatorio &dado);
@@ -118,11 +118,11 @@ void converteDados(string vendasCadastradas[], int linhas, InfoVenda &vendas, In
     vendas.qntId = stoi(vendasCadastradas[3]);
     vendas.totalVenda = stof(vendasCadastradas[4]);
 
-    int numVendas = (linhas - 5) / 5; // Ignora as primeiras 5 linhas e calcula o número de vendas restantes
+    int numVendas = (linhas - 5) / 5; // Ignora as primeiras 5 linhas e calcula o nï¿½mero de vendas restantes
     numItens = 0; // Inicializa o contador de itens
 
     for (int i = 0; i < numVendas; i++) {
-        int baseIndice = 5 + i * 5; // Índice base para cada venda, começando após as 5 primeiras linhas
+        int baseIndice = 5 + i * 5; // ï¿½ndice base para cada venda, comeï¿½ando apï¿½s as 5 primeiras linhas
 
         // Processa os itens da venda atual
         itens[numItens].id = stoi(vendasCadastradas[baseIndice]);
@@ -150,15 +150,15 @@ void converteDados(string vendasCadastradas[], int linhas, InfoVenda &vendas, In
 void carregarDadosRelatorio(DadosRelatorio &dado) {
     ifstream leitura(vendasTotais);
     if (!leitura.is_open()) {
-        // Se o arquivo não existir, mantemos os valores padrão
+        // Se o arquivo nï¿½o existir, mantemos os valores padrï¿½o
         return;
     }
 
     string linha;
     if (getline(leitura, linha)) dado.quantidadeTotal = stoi(linha);
     if (getline(leitura, linha)) dado.receitaTotal = stof(linha);
-    // A média não precisa ser carregada, pois é calculada
-    if (getline(leitura, linha)) {} // Pula a linha da média
+    // A mï¿½dia nï¿½o precisa ser carregada, pois ï¿½ calculada
+    if (getline(leitura, linha)) {} // Pula a linha da mï¿½dia
     if (getline(leitura, linha)) dado.maisVendido = linha;
     if (getline(leitura, linha)) dado.maisUnidades = stoi(linha);
     if (getline(leitura, linha)) dado.menosVendido = linha;
@@ -176,7 +176,7 @@ void vendasTotaisRel(DadosRelatorio &dado, InfoVenda &vendas, InfoItens itens[],
     saida << fixed << setprecision(2);
     saida << dado.quantidadeTotal << endl // Quantidade (em unidades) de produtos vendidos
           << dado.receitaTotal << endl // Receita total gerada na venda
-          << dado.receitaTotal/dado.quantidadeTotal << endl // Média de renda por unidade vendida
+          << dado.receitaTotal/dado.quantidadeTotal << endl // Mï¿½dia de renda por unidade vendida
           << dado.maisVendido << endl // Item mais vendido (nome)
           << dado.maisUnidades << endl // Item mais vendido (quantidade)
           << dado.menosVendido << endl // Item menos vendido (nome)
@@ -188,9 +188,9 @@ void vendasListaRel(InfoVenda &vendas, InfoItens itens[], int numItens) {
     ofstream saida(vendasLista, ios::out | ios::app);
     if(!saida.is_open()) {
         cerr << "Erro ao abrir arquivo." << endl;
-        return;  // Adicionei return para sair se o arquivo não abrir
+        return;  // Adicionei return para sair se o arquivo nï¿½o abrir
     }
-    saida << fixed << setprecision(2);  // Para consistência com outras saídas
+    saida << fixed << setprecision(2);  // Para consistï¿½ncia com outras saï¿½das
     for (int i = 0; i < numItens; i++) {
         saida << vendas.data << endl
               << itens[i].id << endl
@@ -215,7 +215,7 @@ void limpaArquivo(char reseta) {
             saida.close();
             break;
         default:
-            cout << "Opção inválida!" << endl;
+            cout << "Opï¿½ï¿½o invï¿½lida!" << endl;
             break;
     }
 }
