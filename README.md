@@ -15,16 +15,16 @@
 
 ## Como utilizar
 - Preparar um arquivo "vendas.txt" com os dados no formato:
-    1 - Número da venda;
-    2 - Data;
-    3 - Código do cliente;
-    4 - Quantidade de IDs na venda;
-    5 - Valor total;
-    6 - ID do produto;
-    7 - Nome;
-    8 - Preço unitário;
-    9 - Quantidade vendida;
-    10 - Subtotal;
+    * Número da venda;
+    * Data;
+    * Código do cliente;
+    * Quantidade de IDs na venda;
+    * Valor total;
+    * ID do produto;
+    * Nome;
+    * Preço unitário;
+    * Quantidade vendida;
+    * Subtotal; /
     obs.: Os dados referentes aos produtos podem se repetir no documento (6 à 10).
 - Compilar e executar para gerar os relatórios na pasta
 - Interagir com o programa através do menu.
