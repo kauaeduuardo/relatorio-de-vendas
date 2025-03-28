@@ -7,7 +7,7 @@
 	<locale.h>
 	<iomanip>
 
-1742912153 source:c:\users\kauã eduardo\documents\ufs\2024.2\prog2\projeto_02_sistema-de-vendas\sistema-de-vendas\main.cpp
+1743019890 source:c:\users\kauã eduardo\documents\ufs\2024.2\prog2\projeto_02_sistema-de-vendas\sistema-de-vendas\main.cpp
 	<iostream>
 	<fstream>
 	<sstream>
@@ -16,4 +16,44 @@
 	<iomanip>
 	<ctime>
 	<climits>
+	<map>
+	<conio.h>
+
+1743122120 source:c:\users\kauã eduardo\documents\ufs\2024.2\prog2\projeto_02_sistema-de-vendas\relatorio-de-vendas\main.cpp
+	<iostream>
+	<fstream>
+	<sstream>
+	<cstring>
+	<locale.h>
+	<iomanip>
+	<ctime>
+	<climits>
+	<map>
+	<cstdio>
+
+1743122024 c:\users\kauã eduardo\documents\ufs\2024.2\prog2\projeto_02_sistema-de-vendas\relatorio-de-vendas\relatorios.h
+	<iostream>
+	<fstream>
+	<sstream>
+	<cstring>
+	<locale.h>
+	<iomanip>
+	<ctime>
+	<climits>
+	<map>
+	<cstdio>
+	<string>
+
+1743121984 source:c:\users\kauã eduardo\documents\ufs\2024.2\prog2\projeto_02_sistema-de-vendas\relatorio-de-vendas\relatorios.cpp
+	"relatorios.h"
+	<iostream>
+	<fstream>
+	<sstream>
+	<cstring>
+	<locale.h>
+	<iomanip>
+	<ctime>
+	<climits>
+	<map>
+	<cstdio>
 
