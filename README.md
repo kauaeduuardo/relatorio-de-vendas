@@ -24,8 +24,8 @@
     * Nome;
     * Preço unitário;
     * Quantidade vendida;
-    * Subtotal; /
-    obs.: Os dados referentes aos produtos podem se repetir no documento (6 à 10).
+    * Subtotal.
+    * obs.: Os dados referentes aos produtos podem se repetir no documento (6 à 10).
 - Compilar e executar para gerar os relatórios na pasta
 - Interagir com o programa através do menu.
 
