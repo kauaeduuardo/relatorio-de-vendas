@@ -15,7 +15,7 @@
 
 ## Como utilizar
 - Preparar um arquivo "vendas.txt" com os dados no formato:
-    * Número da venda;
+    1* Número da venda;
     * Data;
     * Código do cliente;
     * Quantidade de IDs na venda;
