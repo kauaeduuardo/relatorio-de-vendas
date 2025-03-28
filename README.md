@@ -25,7 +25,7 @@
     * Preço unitário;
     * Quantidade vendida;
     * Subtotal.
-    * obs.: Os dados referentes aos produtos podem se repetir no documento (ID à Subtotal).
+    * Obs.: Os dados referentes aos produtos podem se repetir no documento (ID à Subtotal).
 - Compilar e executar para gerar os relatórios na pasta
 - Interagir com o programa através do menu.
 
