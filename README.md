@@ -29,7 +29,7 @@ Preço unitário;
 Quantidade vendida;
 Subtotal;
 ```
-**Observação:** Os dados dos produtos podem se repetir no mesmo arquivo (de ID à Subtotal).
+**Observação:** Os dados dos produtos podem se repetir no mesmo arquivo (**de ID à Subtotal**).
 
 ### Passo 2: Compilar e Executar 
 1. Compile o código-fonte em C++.
